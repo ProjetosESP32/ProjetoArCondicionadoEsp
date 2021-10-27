@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:splash_ifmt/modules/home/home.dart';
+import 'package:splash_ifmt/pages/home/home.dart';
 
 class AuthController {
   Future<void> currentUser(BuildContext context) async {

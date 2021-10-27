@@ -4,7 +4,9 @@ import 'package:splash_ifmt/shared/app_text_styles.dart';
 
 class ButtonWidget extends StatelessWidget {
   final String titulo;
-  const ButtonWidget({Key? key, required this.titulo}) : super(key: key);
+  final String? function;
+  const ButtonWidget({Key? key, required this.titulo, this.function})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +25,9 @@ class ButtonWidget extends StatelessWidget {
               foregroundColor:
                   MaterialStateProperty.all<Color>(AppColors.background),
             ),
-            onPressed: () {},
+            onPressed: () {
+              print("Botão clicado");
+            },
             child: Padding(
               padding: EdgeInsets.symmetric(vertical: 7.0, horizontal: 0.0),
               child: Text(
