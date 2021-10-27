@@ -1,25 +1,19 @@
-
-<h2 align="center">Como Usar 🤔</h2>
-
-  
-   Você também pode ver um tutorial mais explicadinho clicando <a href="https://vitoria-angel2002.medium.com/criando-uma-splash-page-com-flutter-de-modo-simples-e-r%C3%A1pido-5c3d6c8b5e57">aqui</a>
-
-   ```
-   - Clone esse repositório:
-   $ git clone https://github.com/vihangel/splash_ifmt
-
-   - Entre no diretório:
-   $ cd splash_ifmt
-
-   - Configure o assests:
-   $  assets:
-      - assets/images/
-
-   - Inicie o app: 
-   $ flutter run
-   ```
+<h1 align="center"> Projeto Ar Condicionado </h1>
+<br>
+<p align='center'>
+    <img width="300px" src="https://github.com/ProjetosESP32/ProjetoArCondicionadoEsp/blob/master/assets/images/tela%20login.png" />&nbsp;&nbsp;
+</p>
+<br>
 
 ---
 
-<img alt="Tela de inicio branca com a logo do IFMT" src="https://github.com/Gibdike/splash_ifmt/blob/master/assets/images/Splash.png">
-
+<br>
+<h2 align="center">Tecnologias 💻</h2>
+<br>
+<p align='center'>
+    <img src="https://img.shields.io/badge/Dart-0175C2?style=for-the-badge&logo=dart&logoColor=white" />&nbsp;&nbsp;
+    <img src="https://img.shields.io/badge/C%2B%2B-00599C?style=for-the-badge&logo=c%2B%2B&logoColor=white" />&nbsp;&nbsp;
+    <img src="https://img.shields.io/badge/Flutter-02569B?style=for-the-badge&logo=flutter&logoColor=white" />&nbsp;&nbsp;
+    <img src="https://img.shields.io/badge/Arduino_IDE-00979D?style=for-the-badge&logo=arduino&logoColor=white" />&nbsp;&nbsp;
+    <img src="https://img.shields.io/badge/Figma-F24E1E?style=for-the-badge&logo=figma&logoColor=white" />&nbsp;&nbsp;
+</p>
