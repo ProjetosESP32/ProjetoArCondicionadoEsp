@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "C:\\Users\\vitor\\splash_ifmt\\build\\app\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-night-v8\\values-night-v8.xml",
+            "outputFile": "I:\\vitor\\Documents\\programacao\\ProjetoArCondicionadoEsp\\build\\app\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-night-v8\\values-night-v8.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\vitor\\splash_ifmt\\android\\app\\src\\main\\res\\values-night\\styles.xml",
+                    "source": "I:\\vitor\\Documents\\programacao\\ProjetoArCondicionadoEsp\\android\\app\\src\\main\\res\\values-night\\styles.xml",
                     "from": {
                         "startLines": "3,14",
                         "startColumns": "4,4",

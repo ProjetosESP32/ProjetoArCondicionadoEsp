@@ -9,7 +9,7 @@ class TextStyles {
     color: AppColors.primary,
   );
   static final titleRegular = GoogleFonts.montserrat(
-    fontSize: 26,
+    fontSize: 24,
     fontWeight: FontWeight.w400,
     color: AppColors.primary,
   );
