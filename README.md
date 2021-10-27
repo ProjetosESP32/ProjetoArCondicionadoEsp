@@ -1,7 +1,7 @@
 <h1 align="center"> Projeto Ar Condicionado </h1>
 <br>
 <p align='center'>
-    <img width="300px" src="https://github.com/ProjetosESP32/ProjetoArCondicionadoEsp/blob/master/assets/images/tela%20login.png" />&nbsp;&nbsp;
+    <img width="300px" src="https://github.com/ProjetosESP32/ProjetoArCondicionadoEsp/blob/master/assets/images/tela%20login.png?raw=true" />&nbsp;&nbsp;
 </p>
 <br>
 
