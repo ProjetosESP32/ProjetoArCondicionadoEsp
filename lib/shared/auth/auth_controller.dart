@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:splash_ifmt/pages/home/home.dart';
+import 'package:splash_ifmt/pages/login/login_page.dart';
 
 class AuthController {
   Future<void> currentUser(BuildContext context) async {
@@ -7,7 +8,7 @@ class AuthController {
     Navigator.pushReplacement(
       context,
       MaterialPageRoute<void>(
-        builder: (BuildContext context) => MyHomePage(title: "Home page"),
+        builder: (BuildContext context) => LoginPage(),
       ),
     );
   }

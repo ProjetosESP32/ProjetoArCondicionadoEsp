@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:splash_ifmt/pages/login/login_page.dart';
-import 'package:splash_ifmt/pages/nova_senha/nova_senha_page.dart';
 import 'package:splash_ifmt/pages/recuperar_senha/recuperar_senha_page.dart';
-
 import 'package:splash_ifmt/shared/app_colors.dart';
 import 'package:splash_ifmt/shared/app_images.dart';
 
@@ -30,7 +28,7 @@ class MyApp extends StatelessWidget {
           children: [
             Padding(
               padding: EdgeInsets.all(40.0),
-              child: RecuperarSenha(),
+              child: LoginPage(),
             ),
           ],
         ),
