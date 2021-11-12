@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:splash_ifmt/pages/login/login_page.dart';
-import 'package:splash_ifmt/pages/recuperar_senha/recuperar_senha_page.dart';
+import 'package:splash_ifmt/modules/login/login_page.dart';
 import 'package:splash_ifmt/shared/app_colors.dart';
 import 'package:splash_ifmt/shared/app_images.dart';
 

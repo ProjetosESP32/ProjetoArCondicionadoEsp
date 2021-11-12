@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "I:\\vitor\\Documents\\programacao\\ProjetoArCondicionadoEsp-1\\build\\path_provider\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-pt-rBR\\values-pt-rBR.xml",
+            "outputFile": "I:\\Angel\\Documents\\Programacao\\IF\\ProjetoArCondicionadoEsp\\build\\path_provider\\intermediates\\res\\merged\\debug\\values-pt-rBR\\values-pt-rBR.xml",
             "map": [
                 {
                     "source": "C:\\Users\\vitor\\.gradle\\caches\\transforms-2\\files-2.1\\2e94107f30f39be366a17347c2bf100b\\core-1.1.0\\res\\values-pt-rBR\\values-pt-rBR.xml",
@@ -16,7 +16,7 @@
             ]
         },
         {
-            "outputFile": "I:\\vitor\\Documents\\programacao\\ProjetoArCondicionadoEsp-1\\build\\path_provider\\intermediates\\res\\merged\\debug\\values-pt-rBR\\values-pt-rBR.xml",
+            "outputFile": "I:\\Angel\\Documents\\Programacao\\IF\\ProjetoArCondicionadoEsp\\build\\path_provider\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-pt-rBR\\values-pt-rBR.xml",
             "map": [
                 {
                     "source": "C:\\Users\\vitor\\.gradle\\caches\\transforms-2\\files-2.1\\2e94107f30f39be366a17347c2bf100b\\core-1.1.0\\res\\values-pt-rBR\\values-pt-rBR.xml",

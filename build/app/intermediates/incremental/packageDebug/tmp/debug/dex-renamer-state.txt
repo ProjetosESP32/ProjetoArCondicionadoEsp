@@ -1,4 +1,4 @@
-#Tue Oct 26 22:58:03 AMT 2021
-base.0=I\:\\vitor\\Documents\\programacao\\ProjetoArCondicionadoEsp-1\\build\\app\\intermediates\\dex\\debug\\mergeDexDebug\\classes.dex
-path.0=classes.dex
+#Fri Nov 12 13:06:37 BRT 2021
+base.0=I\:\\Angel\\Documents\\Programacao\\IF\\ProjetoArCondicionadoEsp\\build\\app\\intermediates\\dex\\debug\\mergeDexDebug\\classes.dex
 renamed.0=classes.dex
+path.0=classes.dex
