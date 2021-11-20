@@ -9,11 +9,11 @@ class AppWidget extends StatelessWidget {
       designSize: Size(411.4, 683.4),
       builder: () => MaterialApp(
         debugShowCheckedModeBanner: false,
-        title: 'Beyond',
+        title: 'IF',
         theme: ThemeData(
             fontFamily: 'OpenSans',
-            primarySwatch: Colors.blue,
-            canvasColor: Colors.transparent),
+            primarySwatch: Colors.green,
+            canvasColor: Colors.white),
         initialRoute: '/splashPage',
       ).modular(),
     );
