@@ -1,4 +1,0 @@
-io/flutter/plugins/GeneratedPluginRegistrant.java
- io.flutter.plugins.GeneratedPluginRegistrant
-com/example/splash_ifmt/BuildConfig.java
- com.example.splash_ifmt.BuildConfig
