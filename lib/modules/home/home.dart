@@ -1,47 +1,85 @@
 import 'package:flutter/material.dart';
+import 'package:splash_ifmt/shared/Components/button_white.dart';
+import 'package:splash_ifmt/shared/app_colors.dart';
+import 'package:splash_ifmt/shared/app_images.dart';
+import 'package:splash_ifmt/shared/app_text_styles.dart';
 
-class MyHomePage extends StatefulWidget {
-  MyHomePage({Key? key, required this.title}) : super(key: key);
-  final String title;
-
-  @override
-  _MyHomePageState createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
-
+class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'You have pushed the button this many times:',
+    return MaterialApp(
+      home: Scaffold(
+        appBar: AppBar(
+          // leading: IconButton(
+          //   icon: Icon(Icons.arrow_back, color: Colors.grey),
+          //   onPressed: () => Navigator.of(context).pop(),
+          // ),
+          title: Image.asset(
+            AppImages.logoApp,
+          ),
+          backgroundColor: AppColors.secondary,
+          elevation: 0,
+          actions: <Widget>[
+            IconButton(
+              icon: Icon(Icons.notifications, color: AppColors.stroke),
+              onPressed: () {},
             ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
+            IconButton(
+              icon: Icon(Icons.person, color: AppColors.stroke),
+              onPressed: () {},
+            )
+          ],
+        ),
+        resizeToAvoidBottomInset: false,
+        backgroundColor: AppColors.background,
+        body: ListView(
+          children: [
+            Padding(
+              padding: EdgeInsets.all(40.0),
+              child: Column(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Row(
+                        children: [
+                          Text(
+                            "Status: ",
+                            style: TextStyles.regular,
+                            textAlign: TextAlign.left,
+                          ),
+                          Text(
+                            "Não conectado",
+                            style: TextStyle(
+                              color: AppColors.delete,
+                              fontSize: 16,
+                              fontWeight: FontWeight.w400,
+                            ),
+                            textAlign: TextAlign.left,
+                          )
+                        ],
+                      ),
+                      Text(
+                        "Sala: ---",
+                        style: TextStyles.regular,
+                        textAlign: TextAlign.left,
+                      )
+                    ],
+                  ),
+                  Padding(padding: EdgeInsets.all(20)),
+                  ButtonWhite(titulo: "Conectar na rede"),
+                  Padding(padding: EdgeInsets.all(20)),
+                  ButtonWhite(titulo: "Ler QR Code"),
+                  Padding(padding: EdgeInsets.all(20)),
+                  ButtonWhite(titulo: "Configurações"),
+                ],
+              ),
             ),
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }

@@ -23,4 +23,9 @@ class TextStyles {
     fontWeight: FontWeight.w400,
     color: AppColors.background,
   );
+  static final buttonW = GoogleFonts.montserrat(
+    fontSize: 20,
+    fontWeight: FontWeight.w400,
+    color: AppColors.primary,
+  );
 }

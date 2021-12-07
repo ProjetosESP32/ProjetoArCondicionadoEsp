@@ -133,7 +133,7 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                         onTap: () {
                           print("AHHHHH");
-                          Modular.to.pushNamed("/forgot");
+                          Modular.to.pushReplacementNamed("/forgot");
                         },
                         hoverColor: AppColors.stroke,
                       )
@@ -153,7 +153,7 @@ class _LoginPageState extends State<LoginPage> {
                       try {
                         print("try");
                         await controller.verify();
-                        Modular.to.pushNamed("/splashPage");
+                        Modular.to.pushNamed("/home");
                       } catch (err) {
                         print("ERRP");
                       }

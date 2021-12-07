@@ -1,4 +1,5 @@
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:splash_ifmt/modules/home/home.dart';
 import 'package:splash_ifmt/modules/splash/splash_page.dart';
 
 import 'modules/login/login_page.dart';
@@ -16,5 +17,6 @@ class AppModule extends Module {
     ChildRoute('/login', child: (_, args) => LoginPage()),
     ChildRoute('/forgot', child: (_, args) => RecuperarSenha()),
     ChildRoute('/newPassword', child: (_, args) => NovaSenha()),
+    ChildRoute('/home', child: (_, args) => HomePage()),
   ];
 }

@@ -30,6 +30,7 @@ dependencies:
   google_fonts: ^2.1.0
   flutter_modular: ^4.2.0
   flutter_screenutil: ^5.0.0+2
+  google_sign_in: ^5.2.1
 
 dev_dependencies:
   flutter_test:
