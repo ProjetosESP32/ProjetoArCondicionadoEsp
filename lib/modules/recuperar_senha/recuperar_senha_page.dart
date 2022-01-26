@@ -8,10 +8,11 @@ import 'package:splash_ifmt/shared/app_images.dart';
 
 import 'package:splash_ifmt/shared/app_text_styles.dart';
 
+final controller = Modular.get<LoginController>();
+
 class RecuperarSenha extends StatelessWidget {
   RecuperarSenha({Key? key}) : super(key: key);
 
-  final controller = LoginController();
   final emailInputTextController = TextEditingController();
   final senhaInputTextController = TextEditingController();
 
@@ -25,6 +26,10 @@ class RecuperarSenha extends StatelessWidget {
           ),
           backgroundColor: AppColors.background,
           elevation: 0,
+          leading: IconButton(
+            icon: Icon(Icons.arrow_back, color: Colors.grey[600]),
+            onPressed: () => Modular.to.pushNamed("/login"),
+          ),
         ),
         resizeToAvoidBottomInset: false,
         backgroundColor: AppColors.background,
@@ -54,16 +59,13 @@ class RecuperarSenha extends StatelessWidget {
                     Padding(
                       padding: EdgeInsets.all(15.0),
                     ),
-                    Form(
-                      key: controller.formKey,
-                      child: InputTextWidget(
-                        titulo: "Email",
-                        onChanged: (value) {
-                          controller.onChange(email: value);
-                        },
-                        controller: emailInputTextController,
-                        validator: controller.validateEmail,
-                      ),
+                    InputTextWidget(
+                      errorText: controller.validateEmail,
+                      titulo: "Email",
+                      onChanged: (value) {
+                        controller.setEmail(value);
+                      },
+                      controller: emailInputTextController,
                     ),
                     Padding(
                       padding: EdgeInsets.all(15.0),

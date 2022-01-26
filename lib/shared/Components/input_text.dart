@@ -9,6 +9,7 @@ class InputTextWidget extends StatelessWidget {
   final String? Function(String?)? validator;
   final TextEditingController? controller;
   final void Function(String value)? onChanged;
+  final String? Function() errorText;
 
   const InputTextWidget({
     Key? key,
@@ -17,12 +18,14 @@ class InputTextWidget extends StatelessWidget {
     this.validator,
     this.controller,
     this.onChanged,
+    required this.errorText,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return TextFormField(
+    return TextField(
       decoration: InputDecoration(
+        errorText: errorText == "" ? null : errorText(),
         contentPadding: EdgeInsets.only(left: 25.0),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.all(Radius.circular(100)),
@@ -43,7 +46,6 @@ class InputTextWidget extends StatelessWidget {
       ),
       obscureText: this.senha,
       controller: controller,
-      validator: validator,
       onChanged: onChanged,
     );
   }

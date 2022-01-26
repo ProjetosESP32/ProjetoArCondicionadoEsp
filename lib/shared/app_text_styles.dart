@@ -18,6 +18,22 @@ class TextStyles {
     fontWeight: FontWeight.w400,
     color: AppColors.primary,
   );
+  static final bold = GoogleFonts.montserrat(
+    fontSize: 24,
+    fontWeight: FontWeight.w600,
+    color: AppColors.primary,
+  );
+
+  static final table = GoogleFonts.montserrat(
+    fontSize: 22,
+    fontWeight: FontWeight.w400,
+    color: AppColors.grey,
+  );
+  static final small = GoogleFonts.montserrat(
+    fontSize: 14,
+    fontWeight: FontWeight.w400,
+    color: AppColors.primary,
+  );
   static final button = GoogleFonts.montserrat(
     fontSize: 20,
     fontWeight: FontWeight.w400,

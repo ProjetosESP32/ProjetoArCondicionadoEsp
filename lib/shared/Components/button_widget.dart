@@ -3,9 +3,10 @@ import 'package:splash_ifmt/shared/app_colors.dart';
 import 'package:splash_ifmt/shared/app_text_styles.dart';
 
 class ButtonWidget extends StatelessWidget {
-  final String titulo;
+  final String? titulo;
+  final Icon? icon;
   final VoidCallback? onPressed;
-  const ButtonWidget({Key? key, required this.titulo, this.onPressed})
+  const ButtonWidget({Key? key, this.titulo = "", this.onPressed, this.icon})
       : super(key: key);
 
   @override
@@ -29,7 +30,7 @@ class ButtonWidget extends StatelessWidget {
             child: Padding(
               padding: EdgeInsets.symmetric(vertical: 7.0, horizontal: 0.0),
               child: Text(
-                this.titulo,
+                titulo.toString(),
                 style: TextStyles.button,
               ),
             ),

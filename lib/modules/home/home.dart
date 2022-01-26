@@ -1,19 +1,37 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:flutter_modular/flutter_modular.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:splash_ifmt/modules/home/home_controller.dart';
+import 'package:splash_ifmt/modules/main/main_page.dart';
+import 'package:splash_ifmt/modules/menu/agenda_page.dart';
+import 'package:splash_ifmt/modules/menu/salas_page.dart';
 import 'package:splash_ifmt/shared/Components/button_white.dart';
 import 'package:splash_ifmt/shared/app_colors.dart';
 import 'package:splash_ifmt/shared/app_images.dart';
 import 'package:splash_ifmt/shared/app_text_styles.dart';
+import 'package:water_drop_nav_bar/water_drop_nav_bar.dart';
+
+final controller = Modular.get<HomeController>();
 
 class HomePage extends StatelessWidget {
+  static List<Widget> widgetOptions = <Widget>[
+    AgendaPage(),
+    SalasPage(),
+    Text(
+      'Index 3: Ações',
+    ),
+    Text(
+      'Index 4: Consumo',
+    ),
+  ];
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          // leading: IconButton(
-          //   icon: Icon(Icons.arrow_back, color: Colors.grey),
-          //   onPressed: () => Navigator.of(context).pop(),
-          // ),
           title: Image.asset(
             AppImages.logoApp,
           ),
@@ -25,59 +43,67 @@ class HomePage extends StatelessWidget {
               onPressed: () {},
             ),
             IconButton(
-              icon: Icon(Icons.person, color: AppColors.stroke),
+              icon: Icon(FontAwesomeIcons.ellipsisV, color: AppColors.stroke),
               onPressed: () {},
             )
           ],
         ),
         resizeToAvoidBottomInset: false,
         backgroundColor: AppColors.background,
-        body: ListView(
-          children: [
-            Padding(
-              padding: EdgeInsets.all(40.0),
-              child: Column(
-                mainAxisSize: MainAxisSize.max,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Row(
-                        children: [
-                          Text(
-                            "Status: ",
-                            style: TextStyles.regular,
-                            textAlign: TextAlign.left,
-                          ),
-                          Text(
-                            "Não conectado",
-                            style: TextStyle(
-                              color: AppColors.delete,
-                              fontSize: 16,
-                              fontWeight: FontWeight.w400,
-                            ),
-                            textAlign: TextAlign.left,
-                          )
-                        ],
+        body: Observer(builder: (context) {
+          return widgetOptions.elementAt(controller.selectedIndex);
+        }),
+        bottomNavigationBar: SizedBox(
+          height: 70,
+          child: Observer(
+            builder: (_) {
+              return BottomNavigationBar(
+                elevation: 1,
+                backgroundColor: Colors.white,
+                unselectedFontSize: 10,
+                selectedFontSize: 14,
+                type: BottomNavigationBarType.fixed,
+                showUnselectedLabels: true,
+                selectedLabelStyle: TextStyle(fontWeight: FontWeight.w600),
+                items: [
+                  BottomNavigationBarItem(
+                      icon: Icon(
+                        FontAwesomeIcons.home,
+                        color: controller.selectedIndex == 0
+                            ? AppColors.stroke
+                            : Colors.grey[600],
                       ),
-                      Text(
-                        "Sala: ---",
-                        style: TextStyles.regular,
-                        textAlign: TextAlign.left,
-                      )
-                    ],
-                  ),
-                  Padding(padding: EdgeInsets.all(20)),
-                  ButtonWhite(titulo: "Conectar na rede"),
-                  Padding(padding: EdgeInsets.all(20)),
-                  ButtonWhite(titulo: "Ler QR Code"),
-                  Padding(padding: EdgeInsets.all(20)),
-                  ButtonWhite(titulo: "Configurações"),
+                      label: 'Menu'),
+                  BottomNavigationBarItem(
+                      // icon: SvgPicture.asset(
+                      //   'assets/images/controle.svg',
+                      //   width: 24,
+                      //   color: controller.selectedIndex == 2
+                      //       ? AppColors.stroke
+                      //       : Colors.grey[600],
+                      // ),
+                      icon: Icon(
+                        FontAwesomeIcons.wifi,
+                        color: controller.selectedIndex == 1
+                            ? AppColors.stroke
+                            : Colors.grey[600],
+                      ),
+                      label: 'Controle'),
+                  BottomNavigationBarItem(
+                      icon: Icon(
+                        FontAwesomeIcons.userAlt,
+                        color: controller.selectedIndex == 2
+                            ? AppColors.stroke
+                            : Colors.grey[600],
+                      ),
+                      label: 'Perfil'),
                 ],
-              ),
-            ),
-          ],
+                currentIndex: controller.selectedIndex,
+                onTap: controller.increase,
+                selectedItemColor: AppColors.stroke,
+              );
+            },
+          ),
         ),
       ),
     );

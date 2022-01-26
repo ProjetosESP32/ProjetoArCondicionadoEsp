@@ -1,15 +1,20 @@
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:splash_ifmt/modules/home/home.dart';
+import 'package:splash_ifmt/modules/login/login_controller.dart';
 import 'package:splash_ifmt/modules/splash/splash_page.dart';
+import 'package:splash_ifmt/shared/auth/auth_controller.dart';
 
+import 'modules/home/home_controller.dart';
 import 'modules/login/login_page.dart';
 import 'modules/nova_senha/nova_senha_page.dart';
 import 'modules/recuperar_senha/recuperar_senha_page.dart';
 
 class AppModule extends Module {
-  // final List<Bind> binds = [
-  //   Bind.lazySingleton((i) => AppController()),
-  //   ];
+  final List<Bind> binds = [
+    Bind.lazySingleton((i) => AuthController()),
+    Bind.lazySingleton((i) => LoginController()),
+    Bind.lazySingleton((i) => HomeController()),
+  ];
 
   @override
   final List<ModularRoute> routes = [

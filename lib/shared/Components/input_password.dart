@@ -1,14 +1,19 @@
 // ignore_for_file: must_be_immutable
 
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
+import 'package:splash_ifmt/modules/login/login_controller.dart';
 import 'package:splash_ifmt/shared/app_colors.dart';
 
-class InputPasswordWidget extends StatefulWidget {
-  final String titulo;
+final controllerLogin = Modular.get<LoginController>();
 
+class InputPasswordWidget extends StatelessWidget {
+  final String titulo;
   final String? Function(String?)? validator;
   final TextEditingController? controller;
   final void Function(String value)? onChanged;
+  final String? Function() errorText;
+  final bool passwordVisible;
 
   const InputPasswordWidget({
     Key? key,
@@ -16,18 +21,15 @@ class InputPasswordWidget extends StatefulWidget {
     this.validator,
     this.controller,
     this.onChanged,
+    required this.errorText,
+    required this.passwordVisible,
   }) : super(key: key);
 
   @override
-  State<InputPasswordWidget> createState() => _InputPasswordWidgetState();
-}
-
-class _InputPasswordWidgetState extends State<InputPasswordWidget> {
-  bool _passwordVisible = true;
-  @override
   Widget build(BuildContext context) {
-    return TextFormField(
+    return TextField(
       decoration: InputDecoration(
+        errorText: errorText == "" ? null : errorText(),
         contentPadding: EdgeInsets.only(left: 25.0),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.all(
@@ -36,7 +38,7 @@ class _InputPasswordWidgetState extends State<InputPasswordWidget> {
           borderSide: BorderSide(color: AppColors.primary),
         ),
 
-        labelText: this.widget.titulo,
+        labelText: titulo,
         labelStyle: TextStyle(
           color: AppColors.primary,
           fontSize: 20,
@@ -48,23 +50,18 @@ class _InputPasswordWidgetState extends State<InputPasswordWidget> {
         suffixIcon: IconButton(
             icon: Icon(
               //Não está mudandoo
-              !_passwordVisible ? Icons.visibility : Icons.visibility_off,
+              !passwordVisible ? Icons.visibility : Icons.visibility_off,
               color: AppColors.stroke,
             ),
             onPressed: () {
-              setState(() {
-                _passwordVisible == true
-                    ? _passwordVisible = false
-                    : _passwordVisible = true;
-              });
+              controllerLogin.setIsVisible();
             }),
 
         //borderRadius: BorderRadius.circular(15),
       ),
-      obscureText: _passwordVisible,
-      controller: widget.controller,
-      validator: widget.validator,
-      onChanged: widget.onChanged,
+      obscureText: passwordVisible,
+      controller: controller,
+      onChanged: onChanged,
     );
   }
 }

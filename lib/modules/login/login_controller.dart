@@ -1,56 +1,84 @@
 import 'package:flutter/material.dart';
 import 'package:splash_ifmt/data/models/login_model.dart';
 
-class LoginController {
-  final formKey = GlobalKey<FormState>();
+import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
+import 'package:mobx/mobx.dart';
+
+part 'login_controller.g.dart';
+
+class LoginController = _LoginControllerBase with _$LoginController;
+
+abstract class _LoginControllerBase with Store {
   LoginModel model = LoginModel();
   //Caso a String esteja vazia ela retorna ao campo um texto em vermelho "O nome não pode ser vazio"
-  String? validateNome(String? value) =>
-      value?.isEmpty ?? true ? "O nome não pode ser vazio" : null;
-  String? validatePassword(String? value) =>
-      value?.isEmpty ?? true ? "A senha não pode ser vazia" : null;
-  String? validatePassword2(String? value) {
-    if (value!.length == 0) {
-      return "A senha não pode ser vazia";
-    } else if (value != model.senha) {
-      return "As senha não podem ser diferentes";
-    } else {
-      return null;
-    }
+  @observable
+  bool errorMessage = false;
+
+  @observable
+  bool checkBox = false;
+
+  @observable
+  bool isVisible = true;
+
+  @observable
+  String email = "";
+
+  @observable
+  String senha = "";
+
+  @action
+  void setCheckBox() {
+    checkBox = !checkBox;
   }
 
-  String? validateEmail(String? value) {
+  @action
+  void setIsVisible() {
+    isVisible = !isVisible;
+  }
+
+  @action
+  void setSenha(String value) {
+    senha = value;
+  }
+
+  @action
+  void setEmail(String value) {
+    email = value;
+  }
+
+  @action
+  String? validateEmail() {
     RegExp regExp = new RegExp(
         r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
-    if (value!.length == 0) {
-      return "Informe o Email";
-    } else if (!regExp.hasMatch(value)) {
-      return "Email inválido";
+    if (errorMessage) {
+      if (email.length == 0) {
+        return "Informe o Email";
+      } else if (!regExp.hasMatch(email)) {
+        return "Email inválido";
+      } else {
+        return null;
+      }
     } else {
       return null;
     }
   }
 
-  void onChange({
-    String? senha,
-    String? email,
-    String? nome,
-  }) {
-    model = model.copyWith(senha: senha, email: email, nome: nome);
+  @action
+  String? validateSenha() {
+    if ((senha.isEmpty || senha == "") && errorMessage) {
+      return "este campo é obrigatorio";
+    }
+    return null;
   }
 
-//É chamada depois de cadastrar se o form estiver ok
-
-//Verifica se o Form esta ok e chama a função savePessoa
   Future<void> verify() async {
-    print(model.senha);
-    final form = formKey.currentState;
-    if (form!.validate()) {
-      print("ok");
-      //Form ok
+    errorMessage = true;
 
+    if (validateSenha() == null && validateEmail() == null) {
+      print("pode seguir a pagina");
     } else {
-      //Avisa que tem erro
       throw ("err");
     }
   }
