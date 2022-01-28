@@ -64,6 +64,7 @@ dependencies:
   flutter_holo_date_picker: ^1.0.1+2
   analyzer: ^3.2.0
   water_drop_nav_bar:
+  syncfusion_flutter_datagrid: ^19.4.47
 
 dependency_overrides:
   analyzer:

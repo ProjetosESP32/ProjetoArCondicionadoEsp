@@ -6,6 +6,7 @@ import 'package:splash_ifmt/shared/auth/auth_controller.dart';
 
 import 'modules/home/home_controller.dart';
 import 'modules/login/login_page.dart';
+import 'modules/menu/agenda_controller.dart';
 import 'modules/nova_senha/nova_senha_page.dart';
 import 'modules/recuperar_senha/recuperar_senha_page.dart';
 
@@ -14,6 +15,7 @@ class AppModule extends Module {
     Bind.lazySingleton((i) => AuthController()),
     Bind.lazySingleton((i) => LoginController()),
     Bind.lazySingleton((i) => HomeController()),
+    Bind.lazySingleton((i) => AgendaController()),
   ];
 
   @override
