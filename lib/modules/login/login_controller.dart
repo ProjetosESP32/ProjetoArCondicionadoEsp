@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:splash_ifmt/data/models/login_model.dart';
+import 'package:splash_ifmt/data/models/user/login/login_model.dart';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
+import 'package:splash_ifmt/data/models/user/user_model.dart';
+import 'package:splash_ifmt/data/repository/user/user_repository.dart';
 
 part 'login_controller.g.dart';
 
 class LoginController = _LoginControllerBase with _$LoginController;
 
 abstract class _LoginControllerBase with Store {
-  LoginModel model = LoginModel();
   //Caso a String esteja vazia ela retorna ao campo um texto em vermelho "O nome não pode ser vazio"
   @observable
   bool errorMessage = false;
@@ -78,6 +79,14 @@ abstract class _LoginControllerBase with Store {
 
     if (validateSenha() == null && validateEmail() == null) {
       print("pode seguir a pagina");
+      await UserRepository.saveUser(UserModel(
+        admin: true,
+        email: email,
+        senha: senha,
+        isSaved: checkBox,
+        name: "Teste",
+        telefone: "65 992328339",
+      ));
     } else {
       throw ("err");
     }

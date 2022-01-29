@@ -28,7 +28,7 @@ class RecuperarSenha extends StatelessWidget {
           elevation: 0,
           leading: IconButton(
             icon: Icon(Icons.arrow_back, color: Colors.grey[600]),
-            onPressed: () => Modular.to.pushNamed("/login"),
+            onPressed: () => Modular.to.pop(),
           ),
         ),
         resizeToAvoidBottomInset: false,

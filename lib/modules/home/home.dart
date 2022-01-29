@@ -3,10 +3,12 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:splash_ifmt/modules/controle/controle_page.dart';
 import 'package:splash_ifmt/modules/home/home_controller.dart';
 import 'package:splash_ifmt/modules/main/main_page.dart';
 import 'package:splash_ifmt/modules/menu/agenda_page.dart';
 import 'package:splash_ifmt/modules/menu/salas_page.dart';
+import 'package:splash_ifmt/modules/perfil/perfil_page.dart';
 import 'package:splash_ifmt/shared/Components/button_white.dart';
 import 'package:splash_ifmt/shared/app_colors.dart';
 import 'package:splash_ifmt/shared/app_images.dart';
@@ -18,10 +20,8 @@ final controller = Modular.get<HomeController>();
 class HomePage extends StatelessWidget {
   static List<Widget> widgetOptions = <Widget>[
     AgendaPage(),
-    SalasPage(),
-    Text(
-      'Index 3: Ações',
-    ),
+    ControlePage(),
+    PerfilPage(),
     Text(
       'Index 4: Consumo',
     ),
@@ -29,6 +29,7 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    controller.getUser();
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
@@ -42,10 +43,10 @@ class HomePage extends StatelessWidget {
               icon: Icon(Icons.notifications, color: AppColors.stroke),
               onPressed: () {},
             ),
-            IconButton(
-              icon: Icon(FontAwesomeIcons.ellipsisV, color: AppColors.stroke),
-              onPressed: () {},
-            )
+            // IconButton(
+            //   icon: Icon(FontAwesomeIcons.ellipsisV, color: AppColors.stroke),
+            //   onPressed: () {},
+            // )
           ],
         ),
         resizeToAvoidBottomInset: false,
@@ -68,7 +69,7 @@ class HomePage extends StatelessWidget {
                 items: [
                   BottomNavigationBarItem(
                       icon: Icon(
-                        FontAwesomeIcons.home,
+                        Icons.home,
                         color: controller.selectedIndex == 0
                             ? AppColors.stroke
                             : Colors.grey[600],
@@ -83,7 +84,7 @@ class HomePage extends StatelessWidget {
                       //       : Colors.grey[600],
                       // ),
                       icon: Icon(
-                        FontAwesomeIcons.wifi,
+                        Icons.settings_remote,
                         color: controller.selectedIndex == 1
                             ? AppColors.stroke
                             : Colors.grey[600],
@@ -91,7 +92,7 @@ class HomePage extends StatelessWidget {
                       label: 'Controle'),
                   BottomNavigationBarItem(
                       icon: Icon(
-                        FontAwesomeIcons.userAlt,
+                        Icons.account_circle,
                         color: controller.selectedIndex == 2
                             ? AppColors.stroke
                             : Colors.grey[600],

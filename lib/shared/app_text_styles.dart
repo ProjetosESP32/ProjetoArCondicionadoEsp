@@ -28,6 +28,11 @@ class TextStyles {
     fontWeight: FontWeight.bold,
     color: AppColors.primary,
   );
+  static final boldTableWhite = GoogleFonts.montserrat(
+    fontSize: 18,
+    fontWeight: FontWeight.bold,
+    color: Colors.white,
+  );
   static final table = GoogleFonts.montserrat(
     fontSize: 22,
     fontWeight: FontWeight.w400,

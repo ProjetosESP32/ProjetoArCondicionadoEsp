@@ -1,21 +1,25 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'sala_model.dart';
+part of 'controle_model.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-SalaModel _$SalaModelFromJson(Map<String, dynamic> json) => SalaModel(
+ControleModel _$ControleModelFromJson(Map<String, dynamic> json) =>
+    ControleModel(
       sala: json['sala'] as String,
       bloco: json['bloco'] as String,
-      hora: json['hora'] as String,
+      humidade: json['humidade'] as int,
+      temperatura: json['temperatura'] as int,
       status: json['status'] as String,
     );
 
-Map<String, dynamic> _$SalaModelToJson(SalaModel instance) => <String, dynamic>{
+Map<String, dynamic> _$ControleModelToJson(ControleModel instance) =>
+    <String, dynamic>{
       'sala': instance.sala,
       'bloco': instance.bloco,
-      'hora': instance.hora,
+      'humidade': instance.humidade,
       'status': instance.status,
+      'temperatura': instance.temperatura,
     };

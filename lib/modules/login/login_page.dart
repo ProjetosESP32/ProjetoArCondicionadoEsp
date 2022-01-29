@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:splash_ifmt/modules/login/login_controller.dart';
+import 'package:splash_ifmt/modules/recuperar_senha/recuperar_senha_page.dart';
 import 'package:splash_ifmt/shared/Components/button_widget.dart';
 import 'package:splash_ifmt/shared/Components/input_password.dart';
 import 'package:splash_ifmt/shared/Components/input_text.dart';
@@ -67,6 +68,7 @@ class LoginPage extends StatelessWidget {
                         },
                         controller: senhaInputTextController,
                         passwordVisible: controller.isVisible,
+                        onPressedEye: controller.setIsVisible,
                       ),
                       Padding(
                         padding: EdgeInsets.all(15.0),
@@ -108,7 +110,8 @@ class LoginPage extends StatelessWidget {
                             ),
                             onTap: () {
                               print("AHHHHH");
-                              Modular.to.pushReplacementNamed("/forgot");
+                              Modular.to.push(MaterialPageRoute(
+                                  builder: (context) => RecuperarSenha()));
                             },
                             hoverColor: AppColors.stroke,
                           )
@@ -130,7 +133,7 @@ class LoginPage extends StatelessWidget {
                         await controller.verify();
                         Modular.to.pushNamed("/home");
                       } catch (err) {
-                        print("ERRP");
+                        print(err);
                       }
                     },
                   ),

@@ -12,6 +12,7 @@ class InputPasswordWidget extends StatelessWidget {
   final String? Function(String?)? validator;
   final TextEditingController? controller;
   final void Function(String value)? onChanged;
+  final VoidCallback? onPressedEye;
   final String? Function() errorText;
   final bool passwordVisible;
 
@@ -23,6 +24,7 @@ class InputPasswordWidget extends StatelessWidget {
     this.onChanged,
     required this.errorText,
     required this.passwordVisible,
+    this.onPressedEye,
   }) : super(key: key);
 
   @override
@@ -48,14 +50,13 @@ class InputPasswordWidget extends StatelessWidget {
           borderRadius: BorderRadius.circular(100),
         ),
         suffixIcon: IconButton(
-            icon: Icon(
-              //Não está mudandoo
-              !passwordVisible ? Icons.visibility : Icons.visibility_off,
-              color: AppColors.stroke,
-            ),
-            onPressed: () {
-              controllerLogin.setIsVisible();
-            }),
+          icon: Icon(
+            //Não está mudandoo
+            !passwordVisible ? Icons.visibility : Icons.visibility_off,
+            color: AppColors.stroke,
+          ),
+          onPressed: onPressedEye,
+        ),
 
         //borderRadius: BorderRadius.circular(15),
       ),

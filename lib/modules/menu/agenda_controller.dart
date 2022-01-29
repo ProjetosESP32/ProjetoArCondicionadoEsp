@@ -1,8 +1,9 @@
 import 'dart:math';
 import 'dart:math';
 import 'package:mobx/mobx.dart';
+import 'package:splash_ifmt/data/models/controle/controle_model.dart';
 import 'package:splash_ifmt/data/models/sala/sala_model.dart';
-import 'package:splash_ifmt/modules/menu/data_grid.dart';
+
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 import 'package:intl/intl.dart';
 part 'agenda_controller.g.dart';

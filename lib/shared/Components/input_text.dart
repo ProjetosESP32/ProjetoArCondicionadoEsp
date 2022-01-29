@@ -5,6 +5,7 @@ import 'package:splash_ifmt/shared/app_colors.dart';
 
 class InputTextWidget extends StatelessWidget {
   final String titulo;
+  final String? hintText;
   final bool senha;
   final String? Function(String?)? validator;
   final TextEditingController? controller;
@@ -19,6 +20,7 @@ class InputTextWidget extends StatelessWidget {
     this.controller,
     this.onChanged,
     required this.errorText,
+    this.hintText,
   }) : super(key: key);
 
   @override
@@ -31,7 +33,7 @@ class InputTextWidget extends StatelessWidget {
           borderRadius: BorderRadius.all(Radius.circular(100)),
           borderSide: BorderSide(color: AppColors.primary),
         ),
-
+        hintText: hintText,
         labelText: this.titulo,
         labelStyle: TextStyle(
           color: AppColors.primary,

@@ -24,6 +24,28 @@ mixin _$HomeController on _HomeControllerBase, Store {
     });
   }
 
+  final _$userAtom = Atom(name: '_HomeControllerBase.user');
+
+  @override
+  List<UserModel> get user {
+    _$userAtom.reportRead();
+    return super.user;
+  }
+
+  @override
+  set user(List<UserModel> value) {
+    _$userAtom.reportWrite(value, super.user, () {
+      super.user = value;
+    });
+  }
+
+  final _$getUserAsyncAction = AsyncAction('_HomeControllerBase.getUser');
+
+  @override
+  Future<void> getUser() {
+    return _$getUserAsyncAction.run(() => super.getUser());
+  }
+
   final _$_HomeControllerBaseActionController =
       ActionController(name: '_HomeControllerBase');
 
@@ -41,7 +63,8 @@ mixin _$HomeController on _HomeControllerBase, Store {
   @override
   String toString() {
     return '''
-selectedIndex: ${selectedIndex}
+selectedIndex: ${selectedIndex},
+user: ${user}
     ''';
   }
 }
