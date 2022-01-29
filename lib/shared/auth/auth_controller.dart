@@ -13,9 +13,9 @@ abstract class _AuthControllerBase with Store {
   @action
   Future<void> currentUser() async {
     count = 1;
-    await Future.delayed(Duration(seconds: 3));
+    await Future.delayed(Duration(seconds: 2));
     count = 2;
-    await Future.delayed(Duration(seconds: 3));
+    await Future.delayed(Duration(seconds: 2));
     if (await UserRepository.isUserAuth()) {
       Modular.to.navigate("/home");
     } else {

@@ -34,7 +34,10 @@ class UserRepository extends UserModelAdapter {
     for (int i = 0; i < userRepo.length; i++) {
       user.add(await userRepo.getAt(i));
     }
-
-    return user[0].isSaved!;
+    if (user.isEmpty) {
+      return false;
+    } else {
+      return user[0].isSaved!;
+    }
   }
 }
