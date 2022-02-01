@@ -7,6 +7,7 @@ import 'package:splash_ifmt/modules/splash/splash_page.dart';
 
 import 'package:splash_ifmt/shared/auth/auth_controller.dart';
 
+import 'modules/configuracao/config_controller.dart';
 import 'modules/home/home_controller.dart';
 import 'modules/login/login_page.dart';
 import 'modules/menu/agenda_controller.dart';
@@ -21,6 +22,7 @@ class AppModule extends Module {
     Bind.lazySingleton((i) => AgendaController()),
     Bind.lazySingleton((i) => ControleController()),
     Bind.lazySingleton((i) => PerfilController()),
+    Bind.lazySingleton((i) => ConfigController()),
   ];
 
   @override

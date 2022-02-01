@@ -3,6 +3,7 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:splash_ifmt/modules/configuracao/config_page.dart';
 import 'package:splash_ifmt/modules/controle/controle_page.dart';
 import 'package:splash_ifmt/modules/home/home_controller.dart';
 import 'package:splash_ifmt/modules/main/main_page.dart';
@@ -22,9 +23,7 @@ class HomePage extends StatelessWidget {
     AgendaPage(),
     ControlePage(),
     PerfilPage(),
-    Text(
-      'Index 4: Consumo',
-    ),
+    ConfigPage(),
   ];
 
   @override
@@ -98,6 +97,14 @@ class HomePage extends StatelessWidget {
                             : Colors.grey[600],
                       ),
                       label: 'Perfil'),
+                  BottomNavigationBarItem(
+                      icon: Icon(
+                        Icons.settings,
+                        color: controller.selectedIndex == 3
+                            ? AppColors.stroke
+                            : Colors.grey[600],
+                      ),
+                      label: 'Configuralções'),
                 ],
                 currentIndex: controller.selectedIndex,
                 onTap: controller.increase,
