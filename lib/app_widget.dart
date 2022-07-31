@@ -3,19 +3,28 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class AppWidget extends StatelessWidget {
+  // @override
+  // Widget build(BuildContext context) {
+  //   return ScreenUtilInit(
+  //     designSize: Size(411.4, 683.4),
+  //     builder: () =>  MaterialApp.router(
+
+  //     title: "IF",
+  //     //builder: asuka.builder,
+  //     theme: AppConfigUI.theme,
+  //     routeInformationParser: Modular.routeInformationParser,
+  //     routerDelegate: Modular.routerDelegate,
+  //   );
+  // }
+
   @override
   Widget build(BuildContext context) {
-    return ScreenUtilInit(
-      designSize: Size(411.4, 683.4),
-      builder: () => MaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: 'IF',
-        theme: ThemeData(
-            fontFamily: 'OpenSans',
-            primarySwatch: Colors.green,
-            canvasColor: Colors.white),
-        initialRoute: '/splashPage',
-      ).modular(),
+    return MaterialApp.router(
+      title: "IF",
+      //builder: asuka.builder,
+      //  theme: AppConfigUI.theme,
+      routeInformationParser: Modular.routeInformationParser,
+      routerDelegate: Modular.routerDelegate,
     );
   }
 }

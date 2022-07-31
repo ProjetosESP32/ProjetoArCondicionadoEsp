@@ -33,20 +33,20 @@ dependencies:
   flutter:
     sdk: flutter
   cupertino_icons: ^1.0.2
-  google_fonts: ^2.1.0
-  flutter_modular: ^4.2.0
+  google_fonts: ^3.0.1
+  flutter_modular: ^5.0.3
   flutter_screenutil: ^5.0.0+2
   google_sign_in: ^5.2.1
   hive: ^2.0.4
   hive_flutter: ^1.1.0
-  retrofit_generator: ^4.0.1
+  retrofit_generator: 
   responsive_framework: ^0.1.4
-  syncfusion_flutter_core: ^19.2.47
-  syncfusion_flutter_sliders: ^19.2.47
+  syncfusion_flutter_core: ^20.2.40
+  syncfusion_flutter_sliders: ^20.2.40
   carousel_slider: ^4.0.0
   device_preview: ^1.0.0
   flutter_slidable: ^1.2.0
-  font_awesome_flutter: ^9.1.0
+  font_awesome_flutter: ^10.1.0
   flutter_svg: ^1.0.3
   retrofit: ^3.0.1
   json_annotation: ^4.0.1
@@ -64,8 +64,8 @@ dependencies:
   flutter_holo_date_picker: ^1.0.1+2
   analyzer: ^3.2.0
   water_drop_nav_bar:
-  syncfusion_flutter_datagrid: ^19.4.47
-  mqtt_client: ^7.2.1
+  syncfusion_flutter_datagrid: ^20.2.40
+  mqtt_client: 
 
 dependency_overrides:
   analyzer:
