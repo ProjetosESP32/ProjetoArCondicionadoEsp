@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:asuka/asuka.dart' as asuka;
 
 class AppWidget extends StatelessWidget {
   // @override
@@ -20,7 +21,7 @@ class AppWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp.router(
       title: "IF",
-      // builder: asuka.builder,
+      builder: asuka.builder,
       //  theme: AppConfigUI.theme,
       debugShowCheckedModeBanner: false,
       routeInformationParser: Modular.routeInformationParser,

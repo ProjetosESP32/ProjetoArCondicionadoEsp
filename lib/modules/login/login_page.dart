@@ -1,3 +1,4 @@
+import 'package:asuka/snackbars/asuka_snack_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -134,11 +135,9 @@ class LoginPage extends StatelessWidget {
                     titulo: "Entrar",
                     onPressed: () async {
                       //Chama uma função para validar os dados
-                      try {
-                        print("try");
+                      if (formKey.currentState!.validate()) {
+                        FocusScope.of(context).requestFocus(FocusNode());
                         await controller.verify();
-                      } catch (err) {
-                        print(err);
                       }
                     },
                   ),

@@ -87,6 +87,7 @@ abstract class _LoginControllerBase with Store {
       ));
       Modular.to.pushNamed("/home");
     } on DioError catch (e) {
+      AsukaSnackbar.alert("Erro ao fazer login \n${e.message}").show();
       print(e);
     }
   }
@@ -104,7 +105,7 @@ abstract class _LoginControllerBase with Store {
       Modular.to.pushNamed("/home/");
     } catch (e, s) {
       print('Error ao realizar login, error: $e, stack: $s');
-      AsukaSnackbar.success('Error ao realizar login, error: $e').show();
+      AsukaSnackbar.alert('Error ao realizar login, error: $e').show();
     }
   }
 }
