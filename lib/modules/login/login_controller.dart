@@ -102,7 +102,7 @@ abstract class _LoginControllerBase with Store {
       AsukaSnackbar.success('Logado com sucesso!').show();
 
       //Nao pode usar pop nessa navegação pois o pop não funciona como o back
-      Modular.to.pushNamed("/home/");
+      Modular.to.pushNamed("/home");
     } catch (e, s) {
       print('Error ao realizar login, error: $e, stack: $s');
       AsukaSnackbar.alert('Error ao realizar login, error: $e').show();

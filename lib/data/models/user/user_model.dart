@@ -28,6 +28,9 @@ class UserModel extends HiveObject {
   @HiveField(6)
   String? password;
 
+  @HiveField(7)
+  String? photoUrl;
+
   UserModel(
       {this.name,
       this.email,
@@ -35,7 +38,8 @@ class UserModel extends HiveObject {
       this.telefone,
       this.admin,
       this.isSaved,
-      this.password});
+      this.password,
+      this.photoUrl});
 
   factory UserModel.fromJson(Map<String, dynamic> json) =>
       _$UserModelFromJson(json);

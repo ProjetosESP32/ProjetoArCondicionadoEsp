@@ -23,9 +23,15 @@ abstract class _HomeControllerBase with Store {
   @observable
   List<UserModel> user = [];
 
+  @observable
+  bool loading = false;
+
   @action
   Future<void> getUser() async {
+    loading = true;
+    user.clear();
     user.addAll(await UserRepository.getUser());
+    loading = false;
     print("Chamou usuario no home");
   }
 

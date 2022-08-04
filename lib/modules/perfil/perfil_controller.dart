@@ -14,7 +14,7 @@ abstract class _PerfilControllerBase with Store {
   int currentPage = 0;
 
   @action
-  void initialize() {
+  Future<void> initialize() async {
     getUser();
   }
 
@@ -23,21 +23,20 @@ abstract class _PerfilControllerBase with Store {
     currentPage = value;
   }
 
-  @observable
-  HomeController controller = Modular.get<HomeController>();
+  // @observable
+  // HomeController controller = Modular.get<HomeController>();
 
   @observable
   List<UserModel> user = [];
 
+  @observable
+  HomeController controller = Modular.get<HomeController>();
+
   @action
   void getUser() {
     user.clear();
-    controller.user.forEach((UserModel value) => user.add(value));
-    name = user[0].name!;
-    email = user[0].email!;
-    senha = user[0].senha!;
-    telefone = user[0].telefone!;
-    admin = user[0].admin!;
+    user.addAll(controller.user);
+
     print("user: " + name);
   }
 

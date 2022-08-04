@@ -24,13 +24,14 @@ class UserModelAdapter extends TypeAdapter<UserModel> {
       admin: fields[4] as bool?,
       isSaved: fields[5] as bool?,
       password: fields[6] as String?,
+      photoUrl: fields[7] as String?,
     );
   }
 
   @override
   void write(BinaryWriter writer, UserModel obj) {
     writer
-      ..writeByte(7)
+      ..writeByte(8)
       ..writeByte(0)
       ..write(obj.name)
       ..writeByte(1)
@@ -44,7 +45,9 @@ class UserModelAdapter extends TypeAdapter<UserModel> {
       ..writeByte(5)
       ..write(obj.isSaved)
       ..writeByte(6)
-      ..write(obj.password);
+      ..write(obj.password)
+      ..writeByte(7)
+      ..write(obj.photoUrl);
   }
 
   @override
@@ -70,6 +73,7 @@ UserModel _$UserModelFromJson(Map<String, dynamic> json) => UserModel(
       admin: json['admin'] as bool?,
       isSaved: json['isSaved'] as bool?,
       password: json['password'] as String?,
+      photoUrl: json['photoUrl'] as String?,
     );
 
 Map<String, dynamic> _$UserModelToJson(UserModel instance) {
@@ -88,5 +92,6 @@ Map<String, dynamic> _$UserModelToJson(UserModel instance) {
   writeNotNull('admin', instance.admin);
   writeNotNull('isSaved', instance.isSaved);
   writeNotNull('password', instance.password);
+  writeNotNull('photoUrl', instance.photoUrl);
   return val;
 }

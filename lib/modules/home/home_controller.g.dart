@@ -39,6 +39,21 @@ mixin _$HomeController on _HomeControllerBase, Store {
     });
   }
 
+  final _$loadingAtom = Atom(name: '_HomeControllerBase.loading');
+
+  @override
+  bool get loading {
+    _$loadingAtom.reportRead();
+    return super.loading;
+  }
+
+  @override
+  set loading(bool value) {
+    _$loadingAtom.reportWrite(value, super.loading, () {
+      super.loading = value;
+    });
+  }
+
   final _$getUserAsyncAction = AsyncAction('_HomeControllerBase.getUser');
 
   @override
@@ -71,7 +86,8 @@ mixin _$HomeController on _HomeControllerBase, Store {
   String toString() {
     return '''
 selectedIndex: ${selectedIndex},
-user: ${user}
+user: ${user},
+loading: ${loading}
     ''';
   }
 }

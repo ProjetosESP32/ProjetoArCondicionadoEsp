@@ -51,7 +51,7 @@ dependencies:
   font_awesome_flutter: ^10.1.0
   flutter_svg: ^1.0.3
   retrofit: ^3.0.1
-  json_annotation: ^4.0.1
+  json_annotation: ^4.6.0
   json_serializable: ^6.1.4
   connectivity: ^3.0.6
   dio: ^4.0.0

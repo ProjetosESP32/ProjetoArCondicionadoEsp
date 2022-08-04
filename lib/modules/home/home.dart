@@ -107,7 +107,7 @@ class HomePage extends StatelessWidget {
                             ? AppColors.stroke
                             : Colors.grey[600],
                       ),
-                      label: 'Configuralções'),
+                      label: 'Configurações'),
                 ],
                 currentIndex: controller.selectedIndex,
                 onTap: controller.increase,

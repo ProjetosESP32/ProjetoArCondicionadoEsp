@@ -11,8 +11,16 @@ import 'package:splash_ifmt/shared/Components/input_text.dart';
 import 'package:splash_ifmt/shared/app_colors.dart';
 import 'package:splash_ifmt/shared/app_images.dart';
 import 'package:splash_ifmt/shared/app_text_styles.dart';
+import 'package:validatorless/validatorless.dart';
 
 final controller = Modular.get<PerfilController>();
+final formKey = GlobalKey<FormState>();
+TextEditingController senhaNovaInputTextController = TextEditingController();
+TextEditingController senhaInputTextController = TextEditingController();
+TextEditingController emailInputTextController = TextEditingController();
+TextEditingController userInputTextController = TextEditingController();
+TextEditingController telefoneInputTextController = TextEditingController();
+TextEditingController adminInputTextController = TextEditingController();
 
 class PerfilPage extends StatelessWidget {
   _body() {
@@ -32,10 +40,14 @@ class PerfilPage extends StatelessWidget {
                 color: AppColors.stroke,
               ),
               //color: AppColors.stroke,
-              child: Padding(
-                padding: const EdgeInsets.all(20.0),
-                child: Icon(Icons.person, color: Colors.white, size: 80),
-              ),
+              child: controller.user[0].photoUrl == null
+                  ? Padding(
+                      padding: const EdgeInsets.all(20.0),
+                      child: Icon(Icons.person, color: Colors.white, size: 80),
+                    )
+                  : ClipOval(
+                      child: Image.network(
+                          controller.user[0].photoUrl.toString())),
             ),
             TextButton(
               style: ButtonStyle(
@@ -93,28 +105,32 @@ class PerfilPage extends StatelessWidget {
             Padding(
               padding: EdgeInsets.all(10.0),
             ),
-            Column(
-              children: [
-                Text(
-                  "Vinculadas",
-                  style: TextStyles.regular,
-                  textAlign: TextAlign.center,
-                ),
-                Padding(
-                  padding: EdgeInsets.all(5.0),
-                ),
-                Card(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10), // if you need this
+            Form(
+              key: formKey,
+              child: Column(
+                children: [
+                  Text(
+                    "Vinculadas",
+                    style: TextStyles.regular,
+                    textAlign: TextAlign.center,
                   ),
-                  elevation: 2,
-                  child: Container(
-                    width: 90,
-                    height: 60,
-                    child: Image.asset(AppImages.logoApple),
+                  Padding(
+                    padding: EdgeInsets.all(5.0),
                   ),
-                ),
-              ],
+                  Card(
+                    shape: RoundedRectangleBorder(
+                      borderRadius:
+                          BorderRadius.circular(10), // if you need this
+                    ),
+                    elevation: 2,
+                    child: Container(
+                      width: 90,
+                      height: 60,
+                      child: Image.asset(AppImages.logoApple),
+                    ),
+                  ),
+                ],
+              ),
             ),
             Padding(
               padding: EdgeInsets.all(20.0),
@@ -129,7 +145,8 @@ class PerfilPage extends StatelessWidget {
             ),
             InputTextWidget(
               titulo: "Usuário",
-              errorText: controller.validateSenha,
+              validator:
+                  Validatorless.required("Este campo não deve ser vazio"),
               onChanged: (value) {},
               controller: userInputTextController,
               hintText: controller.user[0].name,
@@ -139,7 +156,10 @@ class PerfilPage extends StatelessWidget {
             ),
             InputTextWidget(
               titulo: "Email",
-              errorText: controller.validateSenha,
+              validator: Validatorless.multiple([
+                Validatorless.email('Digite um email válido'),
+                Validatorless.required('Este campo é obrigatório')
+              ]),
               onChanged: (value) {
                 controller.setEmail(value);
               },
@@ -151,7 +171,8 @@ class PerfilPage extends StatelessWidget {
             ),
             InputTextWidget(
               titulo: "telefone",
-              errorText: controller.validateSenha,
+              validator:
+                  Validatorless.required("Este campo não deve ser vazio"),
               onChanged: (value) {},
               controller: telefoneInputTextController,
               hintText: controller.user[0].telefone,
@@ -161,7 +182,8 @@ class PerfilPage extends StatelessWidget {
             ),
             InputTextWidget(
               titulo: "Admin",
-              errorText: controller.validateSenha,
+              validator:
+                  Validatorless.required("Este campo não deve ser vazio"),
               onChanged: (value) {},
               controller: adminInputTextController,
               hintText: controller.user[0].admin.toString(),
@@ -173,11 +195,8 @@ class PerfilPage extends StatelessWidget {
               titulo: "Salvar",
               onPressed: () async {
                 //Chama uma função para validar os dados
-                try {
-                  print("try");
+                if (formKey.currentState!.validate()) {
                   await controller.verify();
-                } catch (err) {
-                  print("ERRP");
                 }
               },
             ),
@@ -195,7 +214,7 @@ class PerfilPage extends StatelessWidget {
             ButtonWidget(
               titulo: "Sair",
               onPressed: () {
-                Modular.to.navigate("/login");
+                controller.controller.signOut();
               },
               color: Colors.red[400],
             ),
@@ -280,133 +299,132 @@ class PerfilPage extends StatelessWidget {
     }
   }
 
-  TextEditingController senhaNovaInputTextController = TextEditingController();
-  TextEditingController senhaInputTextController = TextEditingController();
-  TextEditingController emailInputTextController = TextEditingController();
-  TextEditingController userInputTextController = TextEditingController();
-  TextEditingController telefoneInputTextController = TextEditingController();
-  TextEditingController adminInputTextController = TextEditingController();
-
   @override
   Widget build(BuildContext context) {
     controller.initialize();
     return Observer(builder: (context) {
-      return Padding(
-        padding:
-            EdgeInsets.only(left: 30.0, top: 30.0, right: 30.0, bottom: 30),
-        child: Container(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.all(
-                Radius.circular(10.0) //                 <--- border radius here
-                ),
-            color: Colors.white,
-          ),
-          child: ListView(
-            shrinkWrap: true,
-            padding: EdgeInsets.all(16),
-            children: [
-              Container(
-                child: Observer(
-                  builder: (context) {
-                    controller.currentPage;
-                    return Table(
-                      border: TableBorder.all(
-                        color: AppColors.background,
-                        borderRadius: BorderRadius.circular(10),
+      controller.currentPage;
+      return controller.controller.loading
+          ? Center(
+              child: CircularProgressIndicator.adaptive(),
+            )
+          : Padding(
+              padding: EdgeInsets.only(
+                  left: 30.0, top: 30.0, right: 30.0, bottom: 30),
+              child: Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.all(Radius.circular(
+                          10.0) //                 <--- border radius here
                       ),
-                      columnWidths: const <int, TableColumnWidth>{
-                        //0: IntrinsicColumnWidth(),
-                        // 1: FlexColumnWidth(),
-                        //2: FixedColumnWidth(64),
-                      },
-                      defaultVerticalAlignment: TableCellVerticalAlignment.top,
-                      children: [
-                        TableRow(
-                          children: <Widget>[
-                            TableCell(
-                              child: TextButton(
-                                style: ButtonStyle(
-                                  backgroundColor:
-                                      MaterialStateProperty.all<Color>(
-                                          controller.currentPage == 0
-                                              ? AppColors.stroke
-                                              : Colors.white),
-                                  foregroundColor:
-                                      MaterialStateProperty.all<Color>(
-                                          AppColors.stroke),
-                                ),
-                                onPressed: () {
-                                  controller.setPage(0);
-                                },
-                                child: Text(
-                                  "Dados",
-                                  style: controller.currentPage == 0
-                                      ? TextStyles.boldTableWhite
-                                      : TextStyles.boldTable,
-                                  textAlign: TextAlign.center,
-                                ),
-                              ),
+                  color: Colors.white,
+                ),
+                child: ListView(
+                  shrinkWrap: true,
+                  padding: EdgeInsets.all(16),
+                  children: [
+                    Container(
+                      child: Observer(
+                        builder: (context) {
+                          controller.currentPage;
+                          return Table(
+                            border: TableBorder.all(
+                              color: AppColors.background,
+                              borderRadius: BorderRadius.circular(10),
                             ),
-                            TableCell(
-                              child: TextButton(
-                                style: ButtonStyle(
-                                  backgroundColor:
-                                      MaterialStateProperty.all<Color>(
-                                          controller.currentPage == 1
-                                              ? AppColors.stroke
-                                              : Colors.white),
-                                  foregroundColor:
-                                      MaterialStateProperty.all<Color>(
-                                          AppColors.stroke),
-                                ),
-                                onPressed: () {
-                                  controller.setPage(1);
-                                },
-                                child: Text(
-                                  "Salas",
-                                  style: controller.currentPage == 1
-                                      ? TextStyles.boldTableWhite
-                                      : TextStyles.boldTable,
-                                  textAlign: TextAlign.center,
-                                ),
+                            columnWidths: const <int, TableColumnWidth>{
+                              //0: IntrinsicColumnWidth(),
+                              // 1: FlexColumnWidth(),
+                              //2: FixedColumnWidth(64),
+                            },
+                            defaultVerticalAlignment:
+                                TableCellVerticalAlignment.top,
+                            children: [
+                              TableRow(
+                                children: <Widget>[
+                                  TableCell(
+                                    child: TextButton(
+                                      style: ButtonStyle(
+                                        backgroundColor:
+                                            MaterialStateProperty.all<Color>(
+                                                controller.currentPage == 0
+                                                    ? AppColors.stroke
+                                                    : Colors.white),
+                                        foregroundColor:
+                                            MaterialStateProperty.all<Color>(
+                                                AppColors.stroke),
+                                      ),
+                                      onPressed: () {
+                                        controller.setPage(0);
+                                      },
+                                      child: Text(
+                                        "Dados",
+                                        style: controller.currentPage == 0
+                                            ? TextStyles.boldTableWhite
+                                            : TextStyles.boldTable,
+                                        textAlign: TextAlign.center,
+                                      ),
+                                    ),
+                                  ),
+                                  TableCell(
+                                    child: TextButton(
+                                      style: ButtonStyle(
+                                        backgroundColor:
+                                            MaterialStateProperty.all<Color>(
+                                                controller.currentPage == 1
+                                                    ? AppColors.stroke
+                                                    : Colors.white),
+                                        foregroundColor:
+                                            MaterialStateProperty.all<Color>(
+                                                AppColors.stroke),
+                                      ),
+                                      onPressed: () {
+                                        controller.setPage(1);
+                                      },
+                                      child: Text(
+                                        "Salas",
+                                        style: controller.currentPage == 1
+                                            ? TextStyles.boldTableWhite
+                                            : TextStyles.boldTable,
+                                        textAlign: TextAlign.center,
+                                      ),
+                                    ),
+                                  ),
+                                  TableCell(
+                                    child: TextButton(
+                                      style: ButtonStyle(
+                                        backgroundColor:
+                                            MaterialStateProperty.all<Color>(
+                                                controller.currentPage == 2
+                                                    ? AppColors.stroke
+                                                    : Colors.white),
+                                        foregroundColor:
+                                            MaterialStateProperty.all<Color>(
+                                                AppColors.stroke),
+                                      ),
+                                      onPressed: () {
+                                        controller.setPage(2);
+                                      },
+                                      child: Text(
+                                        "Senha",
+                                        style: controller.currentPage == 2
+                                            ? TextStyles.boldTableWhite
+                                            : TextStyles.boldTable,
+                                        textAlign: TextAlign.center,
+                                      ),
+                                    ),
+                                  ),
+                                ],
                               ),
-                            ),
-                            TableCell(
-                              child: TextButton(
-                                style: ButtonStyle(
-                                  backgroundColor:
-                                      MaterialStateProperty.all<Color>(
-                                          controller.currentPage == 2
-                                              ? AppColors.stroke
-                                              : Colors.white),
-                                  foregroundColor:
-                                      MaterialStateProperty.all<Color>(
-                                          AppColors.stroke),
-                                ),
-                                onPressed: () {
-                                  controller.setPage(2);
-                                },
-                                child: Text(
-                                  "Senha",
-                                  style: controller.currentPage == 2
-                                      ? TextStyles.boldTableWhite
-                                      : TextStyles.boldTable,
-                                  textAlign: TextAlign.center,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
-                    );
-                  },
+                            ],
+                          );
+                        },
+                      ),
+                    ),
+                    _body()
+                  ],
                 ),
               ),
-              _body()
-            ],
-          ),
-        ),
-      );
+            );
     });
   }
 }

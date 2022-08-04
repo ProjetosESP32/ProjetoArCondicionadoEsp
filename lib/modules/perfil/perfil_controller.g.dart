@@ -24,21 +24,6 @@ mixin _$PerfilController on _PerfilControllerBase, Store {
     });
   }
 
-  final _$controllerAtom = Atom(name: '_PerfilControllerBase.controller');
-
-  @override
-  HomeController get controller {
-    _$controllerAtom.reportRead();
-    return super.controller;
-  }
-
-  @override
-  set controller(HomeController value) {
-    _$controllerAtom.reportWrite(value, super.controller, () {
-      super.controller = value;
-    });
-  }
-
   final _$userAtom = Atom(name: '_PerfilControllerBase.user');
 
   @override
@@ -51,6 +36,21 @@ mixin _$PerfilController on _PerfilControllerBase, Store {
   set user(List<UserModel> value) {
     _$userAtom.reportWrite(value, super.user, () {
       super.user = value;
+    });
+  }
+
+  final _$controllerAtom = Atom(name: '_PerfilControllerBase.controller');
+
+  @override
+  HomeController get controller {
+    _$controllerAtom.reportRead();
+    return super.controller;
+  }
+
+  @override
+  set controller(HomeController value) {
+    _$controllerAtom.reportWrite(value, super.controller, () {
+      super.controller = value;
     });
   }
 
@@ -174,19 +174,16 @@ mixin _$PerfilController on _PerfilControllerBase, Store {
     });
   }
 
-  final _$_PerfilControllerBaseActionController =
-      ActionController(name: '_PerfilControllerBase');
+  final _$initializeAsyncAction =
+      AsyncAction('_PerfilControllerBase.initialize');
 
   @override
-  void initialize() {
-    final _$actionInfo = _$_PerfilControllerBaseActionController.startAction(
-        name: '_PerfilControllerBase.initialize');
-    try {
-      return super.initialize();
-    } finally {
-      _$_PerfilControllerBaseActionController.endAction(_$actionInfo);
-    }
+  Future<void> initialize() {
+    return _$initializeAsyncAction.run(() => super.initialize());
   }
+
+  final _$_PerfilControllerBaseActionController =
+      ActionController(name: '_PerfilControllerBase');
 
   @override
   void setPage(int value) {
@@ -280,8 +277,8 @@ mixin _$PerfilController on _PerfilControllerBase, Store {
   String toString() {
     return '''
 currentPage: ${currentPage},
-controller: ${controller},
 user: ${user},
+controller: ${controller},
 errorMessage: ${errorMessage},
 checkBox: ${checkBox},
 isVisible: ${isVisible},
