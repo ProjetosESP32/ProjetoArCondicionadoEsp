@@ -131,7 +131,6 @@ class LoginPage extends StatelessWidget {
                       try {
                         print("try");
                         await controller.verify();
-                        Modular.to.pushNamed("/home");
                       } catch (err) {
                         print(err);
                       }

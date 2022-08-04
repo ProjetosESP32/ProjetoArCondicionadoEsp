@@ -84,6 +84,13 @@ mixin _$LoginController on _LoginControllerBase, Store {
     });
   }
 
+  final _$verifyAsyncAction = AsyncAction('_LoginControllerBase.verify');
+
+  @override
+  Future<void> verify() {
+    return _$verifyAsyncAction.run(() => super.verify());
+  }
+
   final _$_LoginControllerBaseActionController =
       ActionController(name: '_LoginControllerBase');
 

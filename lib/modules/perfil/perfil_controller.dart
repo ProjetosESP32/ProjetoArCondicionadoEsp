@@ -33,11 +33,11 @@ abstract class _PerfilControllerBase with Store {
   void getUser() {
     user.clear();
     controller.user.forEach((UserModel value) => user.add(value));
-    name = user[0].name;
-    email = user[0].email;
-    senha = user[0].senha;
+    name = user[0].name!;
+    email = user[0].email!;
+    senha = user[0].senha!;
     telefone = user[0].telefone!;
-    admin = user[0].admin;
+    admin = user[0].admin!;
     print("user: " + name);
   }
 

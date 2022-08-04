@@ -40,12 +40,12 @@ dependencies:
   hive: ^2.0.4
   hive_flutter: ^1.1.0
   retrofit_generator: 
-  responsive_framework: ^0.1.4
+  responsive_framework: ^0.2.0
   syncfusion_flutter_core: ^20.2.40
   syncfusion_flutter_sliders: ^20.2.40
   carousel_slider: ^4.0.0
   device_preview: ^1.0.0
-  flutter_slidable: ^1.2.0
+  flutter_slidable: ^2.0.0
   font_awesome_flutter: ^10.1.0
   flutter_svg: ^1.0.3
   retrofit: ^3.0.1

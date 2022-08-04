@@ -8,6 +8,9 @@ import 'package:mobx/mobx.dart';
 import 'package:splash_ifmt/data/models/user/user_model.dart';
 import 'package:splash_ifmt/data/repository/user/user_repository.dart';
 
+import '../../data/service/user/user_service.dart';
+import '../../shared/constants/constants.dart';
+
 part 'login_controller.g.dart';
 
 class LoginController = _LoginControllerBase with _$LoginController;
@@ -74,19 +77,34 @@ abstract class _LoginControllerBase with Store {
     return null;
   }
 
+  final _UserService = UserService(Dio());
+
+  @action
   Future<void> verify() async {
     errorMessage = true;
 
     if (validateSenha() == null && validateEmail() == null) {
       print("pode seguir a pagina");
-      await UserRepository.saveUser(UserModel(
-        admin: true,
-        email: email,
-        senha: senha,
-        isSaved: checkBox,
-        name: "Teste",
-        telefone: "65 992328339",
-      ));
+      try {
+        print(UserModel(email: email, password: senha).toJson());
+        var response = await _UserService.userLogin(
+          'application/json',
+          Constants.URL_SERVICE,
+          UserModel(email: email, password: senha),
+        );
+        print(response);
+        await UserRepository.saveUser(UserModel(
+          admin: true,
+          email: email,
+          senha: senha,
+          isSaved: checkBox,
+          name: "Teste",
+          telefone: "65 992328339",
+        ));
+        Modular.to.pushNamed("/home");
+      } on DioError catch (e) {
+        print(e);
+      }
     } else {
       throw ("err");
     }

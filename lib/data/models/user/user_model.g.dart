@@ -17,19 +17,20 @@ class UserModelAdapter extends TypeAdapter<UserModel> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return UserModel(
-      name: fields[0] as String,
-      email: fields[1] as String,
-      senha: fields[2] as String,
+      name: fields[0] as String?,
+      email: fields[1] as String?,
+      senha: fields[2] as String?,
       telefone: fields[3] as String?,
-      admin: fields[4] as bool,
+      admin: fields[4] as bool?,
       isSaved: fields[5] as bool?,
+      password: fields[6] as String?,
     );
   }
 
   @override
   void write(BinaryWriter writer, UserModel obj) {
     writer
-      ..writeByte(6)
+      ..writeByte(7)
       ..writeByte(0)
       ..write(obj.name)
       ..writeByte(1)
@@ -41,7 +42,9 @@ class UserModelAdapter extends TypeAdapter<UserModel> {
       ..writeByte(4)
       ..write(obj.admin)
       ..writeByte(5)
-      ..write(obj.isSaved);
+      ..write(obj.isSaved)
+      ..writeByte(6)
+      ..write(obj.password);
   }
 
   @override
@@ -60,19 +63,30 @@ class UserModelAdapter extends TypeAdapter<UserModel> {
 // **************************************************************************
 
 UserModel _$UserModelFromJson(Map<String, dynamic> json) => UserModel(
-      name: json['name'] as String,
-      email: json['email'] as String,
-      senha: json['senha'] as String,
+      name: json['name'] as String?,
+      email: json['email'] as String?,
+      senha: json['senha'] as String?,
       telefone: json['telefone'] as String?,
-      admin: json['admin'] as bool,
+      admin: json['admin'] as bool?,
       isSaved: json['isSaved'] as bool?,
+      password: json['password'] as String?,
     );
 
-Map<String, dynamic> _$UserModelToJson(UserModel instance) => <String, dynamic>{
-      'name': instance.name,
-      'email': instance.email,
-      'senha': instance.senha,
-      'telefone': instance.telefone,
-      'admin': instance.admin,
-      'isSaved': instance.isSaved,
-    };
+Map<String, dynamic> _$UserModelToJson(UserModel instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('name', instance.name);
+  writeNotNull('email', instance.email);
+  writeNotNull('senha', instance.senha);
+  writeNotNull('telefone', instance.telefone);
+  writeNotNull('admin', instance.admin);
+  writeNotNull('isSaved', instance.isSaved);
+  writeNotNull('password', instance.password);
+  return val;
+}
