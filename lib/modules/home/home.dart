@@ -32,8 +32,11 @@ class HomePage extends StatelessWidget {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          title: Image.asset(
-            AppImages.logoApp,
+          title: InkWell(
+            onTap: () => controller.signOut(),
+            child: Image.asset(
+              AppImages.logoApp,
+            ),
           ),
           backgroundColor: AppColors.secondary,
           elevation: 0,

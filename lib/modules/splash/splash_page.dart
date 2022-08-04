@@ -1,13 +1,48 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:splash_ifmt/shared/app_colors.dart';
-
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:splash_ifmt/shared/app_images.dart';
-import 'package:splash_ifmt/shared/app_text_styles.dart';
-import 'package:splash_ifmt/shared/auth/auth_controller.dart';
 
-class SplashPage extends StatelessWidget {
+import '../../shared/app_text_styles.dart';
+
+class SplashPage extends StatefulWidget {
   const SplashPage({Key? key}) : super(key: key);
+
+  @override
+  State<SplashPage> createState() => _SplashPageState();
+}
+
+class _SplashPageState extends State<SplashPage> {
+  int count = 1;
+
+  @override
+  void initState() {
+    super.initState();
+
+    Future.delayed(
+      const Duration(seconds: 2),
+      () async {
+        setState(() {
+          count = 1;
+        });
+        await Future.delayed(Duration(seconds: 2));
+
+        setState(() {
+          count = 2;
+        });
+        await Future.delayed(Duration(seconds: 2));
+        FirebaseAuth.instance.authStateChanges().listen((user) {
+          if (user != null) {
+            Modular.to.navigate('/home');
+          } else {
+            Modular.to.navigate('/login');
+            print("login");
+          }
+        });
+      },
+    );
+  }
 
   _splash2() {
     return Padding(
@@ -69,19 +104,14 @@ class SplashPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final controller = AuthController();
-    controller.currentUser();
+    // controller.currentUser();
     return MaterialApp(
       home: Scaffold(
         resizeToAvoidBottomInset: false,
         backgroundColor: Colors.white,
         body: Padding(
           padding: EdgeInsets.all(40.0),
-          child: Observer(
-            builder: (BuildContext context) {
-              return controller.count == 1 ? _splash() : _splash2();
-            },
-          ),
+          child: count == 1 ? _splash() : _splash2(),
         ),
       ),
     );

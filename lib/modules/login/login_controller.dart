@@ -1,3 +1,4 @@
+import 'package:asuka/snackbars/asuka_snack_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:splash_ifmt/data/models/user/login/login_model.dart';
 
@@ -8,6 +9,7 @@ import 'package:mobx/mobx.dart';
 import 'package:splash_ifmt/data/models/user/user_model.dart';
 import 'package:splash_ifmt/data/repository/user/user_repository.dart';
 
+import '../../data/service/auth/auth_service.dart';
 import '../../data/service/user/user_service.dart';
 import '../../shared/constants/constants.dart';
 
@@ -53,23 +55,6 @@ abstract class _LoginControllerBase with Store {
   }
 
   @action
-  String? validateEmail() {
-    RegExp regExp = new RegExp(
-        r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
-    if (errorMessage) {
-      if (email.length == 0) {
-        return "Informe o Email";
-      } else if (!regExp.hasMatch(email)) {
-        return "Email inválido";
-      } else {
-        return null;
-      }
-    } else {
-      return null;
-    }
-  }
-
-  @action
   String? validateSenha() {
     if ((senha.isEmpty || senha == "") && errorMessage) {
       return "este campo é obrigatorio";
@@ -83,30 +68,43 @@ abstract class _LoginControllerBase with Store {
   Future<void> verify() async {
     errorMessage = true;
 
-    if (validateSenha() == null && validateEmail() == null) {
-      print("pode seguir a pagina");
-      try {
-        print(UserModel(email: email, password: senha).toJson());
-        var response = await _UserService.userLogin(
-          'application/json',
-          Constants.URL_SERVICE,
-          UserModel(email: email, password: senha),
-        );
-        print(response);
-        await UserRepository.saveUser(UserModel(
-          admin: true,
-          email: email,
-          senha: senha,
-          isSaved: checkBox,
-          name: "Teste",
-          telefone: "65 992328339",
-        ));
-        Modular.to.pushNamed("/home");
-      } on DioError catch (e) {
-        print(e);
-      }
-    } else {
-      throw ("err");
+    print("pode seguir a pagina");
+    try {
+      print(UserModel(email: email, password: senha).toJson());
+      var response = await _UserService.userLogin(
+        'application/json',
+        Constants.URL_SERVICE,
+        UserModel(email: email, password: senha),
+      );
+      print(response);
+      await UserRepository.saveUser(UserModel(
+        admin: true,
+        email: email,
+        senha: senha,
+        isSaved: checkBox,
+        name: "Teste",
+        telefone: "65 992328339",
+      ));
+      Modular.to.pushNamed("/home");
+    } on DioError catch (e) {
+      print(e);
+    }
+  }
+
+  @action
+  Future<void> signIn() async {
+    final controller = Modular.get<AuthService>();
+    try {
+      // emit(state.copyWith(status: LoginStatus.loading));
+      await controller.signIn();
+      // await controller.signOut();
+      AsukaSnackbar.success('Logado com sucesso!').show();
+
+      //Nao pode usar pop nessa navegação pois o pop não funciona como o back
+      Modular.to.pushNamed("/home/");
+    } catch (e, s) {
+      print('Error ao realizar login, error: $e, stack: $s');
+      AsukaSnackbar.success('Error ao realizar login, error: $e').show();
     }
   }
 }

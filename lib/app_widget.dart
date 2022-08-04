@@ -20,8 +20,9 @@ class AppWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp.router(
       title: "IF",
-      //builder: asuka.builder,
+      // builder: asuka.builder,
       //  theme: AppConfigUI.theme,
+      debugShowCheckedModeBanner: false,
       routeInformationParser: Modular.routeInformationParser,
       routerDelegate: Modular.routerDelegate,
     );

@@ -13,7 +13,7 @@ class InputPasswordWidget extends StatelessWidget {
   final TextEditingController? controller;
   final void Function(String value)? onChanged;
   final VoidCallback? onPressedEye;
-  final String? Function() errorText;
+  final String? Function()? errorText;
   final bool passwordVisible;
 
   const InputPasswordWidget({
@@ -22,16 +22,15 @@ class InputPasswordWidget extends StatelessWidget {
     this.validator,
     this.controller,
     this.onChanged,
-    required this.errorText,
+    this.errorText,
     required this.passwordVisible,
     this.onPressedEye,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return TextField(
+    return TextFormField(
       decoration: InputDecoration(
-        errorText: errorText == "" ? null : errorText(),
         contentPadding: EdgeInsets.only(left: 25.0),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.all(

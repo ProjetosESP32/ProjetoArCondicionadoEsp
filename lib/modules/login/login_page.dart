@@ -10,13 +10,14 @@ import 'package:splash_ifmt/shared/Components/input_text.dart';
 import 'package:splash_ifmt/shared/app_colors.dart';
 import 'package:splash_ifmt/shared/app_images.dart';
 import 'package:splash_ifmt/shared/app_text_styles.dart';
+import 'package:validatorless/validatorless.dart';
 
 final controller = Modular.get<LoginController>();
+TextEditingController emailInputTextController = TextEditingController();
+TextEditingController senhaInputTextController = TextEditingController();
+final formKey = GlobalKey<FormState>();
 
 class LoginPage extends StatelessWidget {
-  TextEditingController emailInputTextController = TextEditingController();
-  TextEditingController senhaInputTextController = TextEditingController();
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -32,7 +33,6 @@ class LoginPage extends StatelessWidget {
         backgroundColor: AppColors.background,
         body: SafeArea(
           child: Observer(builder: (context) {
-            controller.errorMessage;
             return Padding(
               padding: EdgeInsets.all(40.0),
               child: Column(
@@ -46,78 +46,84 @@ class LoginPage extends StatelessWidget {
                     textAlign: TextAlign.center,
                   ),
 
-                  Column(
-                    children: [
-                      //Input Recebe String e Bool(opcional)
-                      InputTextWidget(
-                        titulo: "Email",
-                        controller: emailInputTextController,
-                        errorText: controller.validateEmail,
-                        onChanged: (value) {
-                          controller.setEmail(value);
-                        },
-                      ),
-                      Padding(
-                        padding: EdgeInsets.all(15.0),
-                      ),
-                      InputPasswordWidget(
-                        titulo: "Senha",
-                        errorText: controller.validateSenha,
-                        onChanged: (value) {
-                          controller.setSenha(value);
-                        },
-                        controller: senhaInputTextController,
-                        passwordVisible: controller.isVisible,
-                        onPressedEye: controller.setIsVisible,
-                      ),
-                      Padding(
-                        padding: EdgeInsets.all(15.0),
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              SizedBox(
-                                height: 18.0,
-                                width: 18.0,
-                                child: Checkbox(
-                                  shape: CircleBorder(),
-                                  activeColor: AppColors.primary,
-                                  value: controller.checkBox,
-                                  materialTapTargetSize:
-                                      MaterialTapTargetSize.shrinkWrap,
-                                  onChanged: (value) {
-                                    controller.setCheckBox();
-                                  },
+                  Form(
+                    key: formKey,
+                    child: Column(
+                      children: [
+                        //Input Recebe String e Bool(opcional)
+                        InputTextWidget(
+                          titulo: "Email",
+                          controller: emailInputTextController,
+                          validator: Validatorless.multiple([
+                            Validatorless.email('Digite um email válido'),
+                            Validatorless.required('Este campo é obrigatório')
+                          ]),
+                          onChanged: (value) {
+                            controller.setEmail(value);
+                          },
+                        ),
+                        Padding(
+                          padding: EdgeInsets.all(15.0),
+                        ),
+                        InputPasswordWidget(
+                          titulo: "Senha",
+                          errorText: controller.validateSenha,
+                          onChanged: (value) {
+                            controller.setSenha(value);
+                          },
+                          controller: senhaInputTextController,
+                          passwordVisible: controller.isVisible,
+                          onPressedEye: controller.setIsVisible,
+                        ),
+                        Padding(
+                          padding: EdgeInsets.all(15.0),
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                SizedBox(
+                                  height: 18.0,
+                                  width: 18.0,
+                                  child: Checkbox(
+                                    shape: CircleBorder(),
+                                    activeColor: AppColors.primary,
+                                    value: controller.checkBox,
+                                    materialTapTargetSize:
+                                        MaterialTapTargetSize.shrinkWrap,
+                                    onChanged: (value) {
+                                      controller.setCheckBox();
+                                    },
+                                  ),
                                 ),
-                              ),
-                              Padding(
-                                padding: EdgeInsets.all(2.0),
-                              ),
-                              Text(
-                                "Lembrar usuário",
-                                style: TextStyles.small,
-                                textAlign: TextAlign.left,
-                              )
-                            ],
-                          ),
-                          InkWell(
-                            child: Text(
-                              "Esqueceu a senha",
-                              style: TextStyles.small,
+                                Padding(
+                                  padding: EdgeInsets.all(2.0),
+                                ),
+                                Text(
+                                  "Lembrar usuário",
+                                  style: TextStyles.small,
+                                  textAlign: TextAlign.left,
+                                )
+                              ],
                             ),
-                            onTap: () {
-                              print("AHHHHH");
-                              Modular.to.push(MaterialPageRoute(
-                                  builder: (context) => RecuperarSenha()));
-                            },
-                            hoverColor: AppColors.stroke,
-                          )
-                        ],
-                      ),
-                    ],
+                            InkWell(
+                              child: Text(
+                                "Esqueceu a senha",
+                                style: TextStyles.small,
+                              ),
+                              onTap: () {
+                                print("AHHHHH");
+                                Modular.to.push(MaterialPageRoute(
+                                    builder: (context) => RecuperarSenha()));
+                              },
+                              hoverColor: AppColors.stroke,
+                            )
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
 
                   //-----CheckedBox
@@ -165,9 +171,7 @@ class LoginPage extends StatelessWidget {
                                 child: Image.asset(AppImages.logoApple),
                               ),
                             ),
-                            onTap: () {
-                              print("AHHHHH");
-                            },
+                            onTap: () {},
                           ),
                           InkWell(
                             child: Card(
@@ -201,6 +205,7 @@ class LoginPage extends StatelessWidget {
                             ),
                             onTap: () {
                               print("AHHHHH");
+                              controller.signIn();
                             },
                           ),
                         ],

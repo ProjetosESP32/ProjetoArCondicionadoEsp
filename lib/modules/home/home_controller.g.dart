@@ -46,6 +46,13 @@ mixin _$HomeController on _HomeControllerBase, Store {
     return _$getUserAsyncAction.run(() => super.getUser());
   }
 
+  final _$signOutAsyncAction = AsyncAction('_HomeControllerBase.signOut');
+
+  @override
+  Future<void> signOut() {
+    return _$signOutAsyncAction.run(() => super.signOut());
+  }
+
   final _$_HomeControllerBaseActionController =
       ActionController(name: '_HomeControllerBase');
 

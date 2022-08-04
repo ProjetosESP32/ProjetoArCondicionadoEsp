@@ -91,6 +91,13 @@ mixin _$LoginController on _LoginControllerBase, Store {
     return _$verifyAsyncAction.run(() => super.verify());
   }
 
+  final _$signInAsyncAction = AsyncAction('_LoginControllerBase.signIn');
+
+  @override
+  Future<void> signIn() {
+    return _$signInAsyncAction.run(() => super.signIn());
+  }
+
   final _$_LoginControllerBaseActionController =
       ActionController(name: '_LoginControllerBase');
 
@@ -133,17 +140,6 @@ mixin _$LoginController on _LoginControllerBase, Store {
         name: '_LoginControllerBase.setEmail');
     try {
       return super.setEmail(value);
-    } finally {
-      _$_LoginControllerBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
-  String? validateEmail() {
-    final _$actionInfo = _$_LoginControllerBaseActionController.startAction(
-        name: '_LoginControllerBase.validateEmail');
-    try {
-      return super.validateEmail();
     } finally {
       _$_LoginControllerBaseActionController.endAction(_$actionInfo);
     }

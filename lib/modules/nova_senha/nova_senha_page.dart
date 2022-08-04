@@ -9,6 +9,7 @@ import 'package:splash_ifmt/shared/app_colors.dart';
 import 'package:splash_ifmt/shared/app_images.dart';
 
 import 'package:splash_ifmt/shared/app_text_styles.dart';
+import 'package:validatorless/validatorless.dart';
 
 final controller = Modular.get<LoginController>();
 
@@ -66,7 +67,8 @@ class NovaSenha extends StatelessWidget {
                           ),
                           InputPasswordWidget(
                             titulo: "Senha",
-                            errorText: controller.validateEmail,
+                            validator: Validatorless.required(
+                                'Este campo é obrigatório'),
                             onChanged: (value) {
                               controller.setEmail(value);
                             },
@@ -78,7 +80,8 @@ class NovaSenha extends StatelessWidget {
                           ),
                           InputPasswordWidget(
                             titulo: "Senha",
-                            errorText: controller.validateEmail,
+                            validator: Validatorless.required(
+                                'Este campo é obrigatório'),
                             onChanged: (value) {
                               controller.setEmail(value);
                             },

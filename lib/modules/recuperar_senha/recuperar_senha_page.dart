@@ -7,6 +7,7 @@ import 'package:splash_ifmt/shared/app_colors.dart';
 import 'package:splash_ifmt/shared/app_images.dart';
 
 import 'package:splash_ifmt/shared/app_text_styles.dart';
+import 'package:validatorless/validatorless.dart';
 
 final controller = Modular.get<LoginController>();
 
@@ -60,7 +61,10 @@ class RecuperarSenha extends StatelessWidget {
                       padding: EdgeInsets.all(15.0),
                     ),
                     InputTextWidget(
-                      errorText: controller.validateEmail,
+                      validator: Validatorless.multiple([
+                        Validatorless.email('Digite um email válido'),
+                        Validatorless.required('Este campo é obrigatório')
+                      ]),
                       titulo: "Email",
                       onChanged: (value) {
                         controller.setEmail(value);

@@ -32,6 +32,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  firebase_core: ^1.18.0
+  firebase_auth: ^3.3.20
   cupertino_icons: ^1.0.2
   google_fonts: ^3.0.1
   flutter_modular: ^5.0.3
@@ -66,6 +68,8 @@ dependencies:
   water_drop_nav_bar:
   syncfusion_flutter_datagrid: ^20.2.40
   mqtt_client: 
+  asuka: ^2.0.0+1
+  validatorless: ^1.2.1
 
 dependency_overrides:
   analyzer:
