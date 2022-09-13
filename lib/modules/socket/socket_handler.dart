@@ -54,15 +54,16 @@ abstract class _SocketHandlerBase with Store {
     try {
       final socket = await _getInstance();
       socket.writeln(message);
-      await AsukaSnackbar.message(message);
+      AsukaSnackbar.message(message).show();
       await socket.flush();
 
       _destroyAfterTime();
     } catch (e) {
       print("Erro ao enviar mensagem: $e");
 
-      await AsukaSnackbar.message(
-          "Erro ao enviar mensagem: $message, error: $e");
+      AsukaSnackbar.message("Erro ao enviar mensagem: $message, error: $e")
+          .show();
+      throw ("error");
     }
   }
 }

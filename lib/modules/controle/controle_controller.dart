@@ -24,11 +24,11 @@ abstract class _ControleControllerBase with Store {
   final socketController = Modular.get<SocketHandler>();
 
   @action
-  void setTemperatura(int value) {
+  Future<void> setTemperatura(int value) async {
     controleInfos[0].temperatura = controleInfos[0].temperatura + value;
     temperatura = value + controleInfos[0].temperatura;
     print(controleInfos[0].temperatura.toString());
-    socketController.sendMessage(temperatura.toString());
+    await socketController.sendMessage(temperatura.toString());
   }
 
   @action

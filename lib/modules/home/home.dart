@@ -30,6 +30,7 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     controller.getUser();
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: AppBar(
           title: InkWell(
