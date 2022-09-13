@@ -1,6 +1,9 @@
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
 import 'package:splash_ifmt/data/models/controle/controle_model.dart';
 import 'package:splash_ifmt/data/models/sala/sala_model.dart';
+
+import '../socket/socket_handler.dart';
 
 part 'controle_controller.g.dart';
 
@@ -18,12 +21,14 @@ abstract class _ControleControllerBase with Store {
     getData();
   }
 
+  final socketController = Modular.get<SocketHandler>();
+
   @action
-  void setTemperatura(int value) {
-    //Nao sei o motivo mas o state não estava sendo mudado pelo controleInfos
+  Future<void> setTemperatura(int value) async {
     controleInfos[0].temperatura = controleInfos[0].temperatura + value;
     temperatura = value + controleInfos[0].temperatura;
     print(controleInfos[0].temperatura.toString());
+    await socketController.sendMessage(temperatura.toString());
   }
 
   @action

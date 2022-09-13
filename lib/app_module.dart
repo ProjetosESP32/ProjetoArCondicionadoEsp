@@ -11,6 +11,7 @@ import 'modules/menu/agenda_controller.dart';
 import 'modules/nova_senha/nova_senha_page.dart';
 import 'modules/perfil/perfil_controller.dart';
 import 'modules/recuperar_senha/recuperar_senha_page.dart';
+import 'modules/socket/socket_handler.dart';
 import 'modules/splash/splash_page.dart';
 
 class AppModule extends Module {
@@ -22,6 +23,7 @@ class AppModule extends Module {
     Bind.lazySingleton((i) => ControleController()),
     Bind.lazySingleton((i) => PerfilController()),
     Bind.lazySingleton((i) => ConfigController()),
+    Bind.lazySingleton((i) => SocketHandler()),
   ];
 
   @override

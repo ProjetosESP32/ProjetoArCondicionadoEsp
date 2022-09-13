@@ -21,7 +21,9 @@ final formKey = GlobalKey<FormState>();
 class LoginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: AppBar(
           title: Image.asset(

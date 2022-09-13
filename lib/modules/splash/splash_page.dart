@@ -106,6 +106,7 @@ class _SplashPageState extends State<SplashPage> {
   Widget build(BuildContext context) {
     // controller.currentUser();
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: Scaffold(
         resizeToAvoidBottomInset: false,
         backgroundColor: Colors.white,
